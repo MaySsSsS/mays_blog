@@ -2,13 +2,12 @@
  * Steam 数据获取脚本
  * 用于 GitHub Actions 定时获取 Steam 游戏数据
  */
-
 const fs = require("fs");
 const path = require("path");
 
-// 配置 - 这些值需要通过环境变量或 GitHub Secrets 设置
-const STEAM_API_KEY = process.env.STEAM_API_KEY;
-const STEAM_ID = process.env.STEAM_ID;
+// 配置 - 私人仓库直接配置
+const STEAM_API_KEY = "09EDFE628D0F16EDE4A1FFD4F5DDC2E9";
+const STEAM_ID = "76561198378879040";
 
 const API_BASE = "https://api.steampowered.com";
 

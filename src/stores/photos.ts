@@ -91,8 +91,12 @@ export const usePhotoStore = defineStore("photos", () => {
   const groupsByCity = computed(() => {
     const map: Record<string, PhotoGroup[]> = {};
     groups.value.forEach((g) => {
-      if (!map[g.city]) map[g.city] = [];
-      map[g.city].push(g);
+      const cityGroups = map[g.city];
+      if (!cityGroups) {
+        map[g.city] = [g];
+      } else {
+        cityGroups.push(g);
+      }
     });
     return map;
   });

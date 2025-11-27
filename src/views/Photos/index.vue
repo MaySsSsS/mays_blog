@@ -223,14 +223,14 @@ const showCreateGroup = ref(false);
 const showUploader = ref(false);
 const showLightbox = ref(false);
 const lightboxIndex = ref(0);
-const newGroupName = ref("");
 
 // 初始化
 onMounted(() => {
   photoStore.initSampleData();
-  if (photoStore.groups.length > 0) {
-    activeGroupId.value = photoStore.groups[0].id;
-    activeCity.value = photoStore.groups[0].city;
+  const firstGroup = photoStore.groups[0];
+  if (firstGroup) {
+    activeGroupId.value = firstGroup.id;
+    activeCity.value = firstGroup.city;
   }
 });
 

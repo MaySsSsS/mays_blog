@@ -21,7 +21,7 @@
           <span class="stat-value">{{ formatLastPlayed }}</span>
         </div>
       </div>
-      <div class="progress-bar" v-if="maxPlaytime > 0">
+      <div class="progress-bar" v-if="maxPlaytime && maxPlaytime > 0">
         <div
           class="progress-fill"
           :style="{ width: progressPercent + '%' }"

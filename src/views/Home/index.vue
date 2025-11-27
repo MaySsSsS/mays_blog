@@ -188,8 +188,9 @@ const favoriteGames = computed(() => {
 });
 
 const maxPlaytime = computed(() => {
-  if (!favoriteGames.value.length) return 0;
-  return favoriteGames.value[0].playtime_forever;
+  const firstGame = favoriteGames.value[0];
+  if (!firstGame) return 0;
+  return firstGame.playtime_forever;
 });
 
 // 最近动态：混合游戏和照片

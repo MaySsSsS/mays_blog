@@ -457,7 +457,9 @@ const cityConnections = computed(() => {
   for (let i = 0; i < visited.length - 1; i++) {
     const from = visited[i];
     const to = visited[i + 1];
-    connections.push(`M ${from.x} ${from.y} L ${to.x} ${to.y}`);
+    if (from && to) {
+      connections.push(`M ${from.x} ${from.y} L ${to.x} ${to.y}`);
+    }
   }
 
   return connections;

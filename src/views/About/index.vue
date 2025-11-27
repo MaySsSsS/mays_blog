@@ -192,6 +192,7 @@ onMounted(() => {
 .about-page {
   min-height: 100vh;
   padding-bottom: 4rem;
+  background: #f8fafc;
 }
 
 /* Profile Section */
@@ -201,7 +202,7 @@ onMounted(() => {
   justify-content: center;
   background: linear-gradient(
     180deg,
-    rgba(102, 192, 244, 0.1) 0%,
+    rgba(59, 130, 246, 0.08) 0%,
     transparent 100%
   );
 }
@@ -222,17 +223,17 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 4px solid #66c0f4;
-  box-shadow: 0 0 40px rgba(102, 192, 244, 0.4);
+  border: 4px solid #3b82f6;
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.25);
 }
 
 .profile-avatar.placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(102, 192, 244, 0.1);
+  background: rgba(59, 130, 246, 0.1);
   border-radius: 50%;
-  border: 4px solid #66c0f4;
+  border: 4px solid #3b82f6;
   font-size: 4rem;
 }
 
@@ -240,24 +241,24 @@ onMounted(() => {
   position: absolute;
   bottom: 0;
   right: 0;
-  background: linear-gradient(135deg, #ffd700, #ffaa00);
-  color: #0d1117;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #ffffff;
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 700;
-  box-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 2px 10px rgba(251, 191, 36, 0.4);
 }
 
 .profile-name {
   font-size: 2rem;
   font-weight: 700;
-  color: #e6edf3;
+  color: #1e293b;
   margin-bottom: 0.75rem;
 }
 
 .profile-bio {
-  color: #8b949e;
+  color: #64748b;
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
@@ -281,24 +282,24 @@ onMounted(() => {
 }
 
 .profile-link.steam {
-  background: rgba(102, 192, 244, 0.1);
-  color: #66c0f4;
-  border: 1px solid rgba(102, 192, 244, 0.3);
+  background: rgba(59, 130, 246, 0.08);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 .profile-link.steam:hover {
-  background: rgba(102, 192, 244, 0.2);
+  background: rgba(59, 130, 246, 0.15);
 }
 
 .profile-link.github {
-  background: rgba(139, 148, 158, 0.1);
-  color: #8b949e;
-  border: 1px solid rgba(139, 148, 158, 0.3);
+  background: rgba(100, 116, 139, 0.08);
+  color: #64748b;
+  border: 1px solid rgba(100, 116, 139, 0.2);
 }
 
 .profile-link.github:hover {
-  background: rgba(139, 148, 158, 0.2);
-  color: #e6edf3;
+  background: rgba(100, 116, 139, 0.15);
+  color: #1e293b;
 }
 
 .link-icon {
@@ -321,7 +322,7 @@ onMounted(() => {
   gap: 0.75rem;
   font-size: 1.75rem;
   font-weight: 700;
-  color: #e6edf3;
+  color: #1e293b;
   margin-bottom: 2rem;
 }
 
@@ -336,17 +337,19 @@ onMounted(() => {
 }
 
 .stat-card {
-  background: rgba(22, 27, 34, 0.8);
-  border: 1px solid rgba(102, 192, 244, 0.1);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 2rem;
   text-align: center;
   transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .stat-card:hover {
-  border-color: rgba(102, 192, 244, 0.3);
+  border-color: #3b82f6;
   transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.1);
 }
 
 .stat-icon {
@@ -357,28 +360,29 @@ onMounted(() => {
 .stat-value {
   font-size: 2rem;
   font-weight: 700;
-  color: #66c0f4;
+  color: #3b82f6;
   margin-bottom: 0.5rem;
 }
 
 .stat-label {
-  color: #8b949e;
+  color: #64748b;
   font-size: 0.9rem;
 }
 
 /* Favorite Section */
 .favorite-section {
   padding: 4rem 2rem;
-  background: rgba(102, 192, 244, 0.03);
+  background: rgba(59, 130, 246, 0.03);
 }
 
 .favorite-card {
   display: flex;
   gap: 2rem;
-  background: rgba(22, 27, 34, 0.8);
-  border: 1px solid rgba(102, 192, 244, 0.1);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .favorite-image {
@@ -402,25 +406,25 @@ onMounted(() => {
 .favorite-name {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #e6edf3;
+  color: #1e293b;
   margin-bottom: 0.75rem;
 }
 
 .favorite-playtime {
-  color: #66c0f4;
+  color: #3b82f6;
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
 }
 
 .favorite-link {
   display: inline-block;
-  color: #8b949e;
+  color: #64748b;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .favorite-link:hover {
-  color: #66c0f4;
+  color: #3b82f6;
 }
 
 /* Site Section */
@@ -429,20 +433,21 @@ onMounted(() => {
 }
 
 .site-info {
-  background: rgba(22, 27, 34, 0.8);
-  border: 1px solid rgba(102, 192, 244, 0.1);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .site-info p {
-  color: #8b949e;
+  color: #64748b;
   line-height: 1.8;
   margin-bottom: 1.5rem;
 }
 
 .tech-stack h4 {
-  color: #e6edf3;
+  color: #1e293b;
   margin-bottom: 1rem;
 }
 
@@ -454,12 +459,12 @@ onMounted(() => {
 }
 
 .tech-tag {
-  background: rgba(102, 192, 244, 0.1);
-  color: #66c0f4;
+  background: rgba(59, 130, 246, 0.08);
+  color: #3b82f6;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   font-size: 0.85rem;
-  border: 1px solid rgba(102, 192, 244, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.15);
 }
 
 .last-updated {

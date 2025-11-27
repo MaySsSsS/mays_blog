@@ -174,6 +174,7 @@ onMounted(() => {
 .games-page {
   min-height: 100vh;
   padding-bottom: 4rem;
+  background: #f8fafc;
 }
 
 /* Page Header */
@@ -182,7 +183,7 @@ onMounted(() => {
   text-align: center;
   background: linear-gradient(
     180deg,
-    rgba(102, 192, 244, 0.1) 0%,
+    rgba(59, 130, 246, 0.08) 0%,
     transparent 100%
   );
 }
@@ -194,7 +195,7 @@ onMounted(() => {
   gap: 1rem;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #e6edf3;
+  color: #1e293b;
   margin-bottom: 1rem;
 }
 
@@ -203,7 +204,7 @@ onMounted(() => {
 }
 
 .page-subtitle {
-  color: #8b949e;
+  color: #64748b;
   font-size: 1.1rem;
 }
 
@@ -224,9 +225,10 @@ onMounted(() => {
   align-items: center;
   flex-wrap: wrap;
   padding: 1.5rem;
-  background: rgba(22, 27, 34, 0.8);
+  background: #ffffff;
   border-radius: 16px;
-  border: 1px solid rgba(102, 192, 244, 0.1);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .search-box {
@@ -235,15 +237,15 @@ onMounted(() => {
   gap: 0.75rem;
   flex: 1;
   min-width: 250px;
-  background: rgba(13, 17, 23, 0.8);
+  background: #f8fafc;
   border-radius: 12px;
   padding: 0 1rem;
-  border: 1px solid rgba(102, 192, 244, 0.1);
+  border: 1px solid #e2e8f0;
   transition: border-color 0.3s ease;
 }
 
 .search-box:focus-within {
-  border-color: #66c0f4;
+  border-color: #3b82f6;
 }
 
 .search-icon {
@@ -255,13 +257,13 @@ onMounted(() => {
   background: none;
   border: none;
   padding: 0.875rem 0;
-  color: #e6edf3;
+  color: #1e293b;
   font-size: 1rem;
   outline: none;
 }
 
 .search-input::placeholder {
-  color: #8b949e;
+  color: #94a3b8;
 }
 
 .sort-options {
@@ -271,16 +273,16 @@ onMounted(() => {
 }
 
 .sort-label {
-  color: #8b949e;
+  color: #64748b;
   font-size: 0.9rem;
 }
 
 .sort-select {
-  background: rgba(13, 17, 23, 0.8);
-  border: 1px solid rgba(102, 192, 244, 0.2);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 0.625rem 1rem;
-  color: #e6edf3;
+  color: #1e293b;
   font-size: 0.9rem;
   cursor: pointer;
   outline: none;
@@ -289,29 +291,29 @@ onMounted(() => {
 
 .sort-select:hover,
 .sort-select:focus {
-  border-color: #66c0f4;
+  border-color: #3b82f6;
 }
 
 .filter-btn {
-  background: rgba(102, 192, 244, 0.1);
-  border: 1px solid rgba(102, 192, 244, 0.2);
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 0.625rem 1rem;
-  color: #8b949e;
+  color: #64748b;
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .filter-btn:hover {
-  background: rgba(102, 192, 244, 0.15);
-  color: #66c0f4;
+  background: rgba(59, 130, 246, 0.12);
+  color: #3b82f6;
 }
 
 .filter-btn.active {
-  background: rgba(102, 192, 244, 0.2);
-  border-color: #66c0f4;
-  color: #66c0f4;
+  background: rgba(59, 130, 246, 0.15);
+  border-color: #3b82f6;
+  color: #3b82f6;
 }
 
 /* Games Section */
@@ -320,7 +322,7 @@ onMounted(() => {
 }
 
 .games-count {
-  color: #8b949e;
+  color: #64748b;
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
 }
@@ -336,14 +338,14 @@ onMounted(() => {
 .empty-state {
   text-align: center;
   padding: 4rem;
-  color: #8b949e;
+  color: #64748b;
 }
 
 .loader {
   width: 50px;
   height: 50px;
-  border: 3px solid rgba(102, 192, 244, 0.2);
-  border-top-color: #66c0f4;
+  border: 3px solid rgba(59, 130, 246, 0.2);
+  border-top-color: #3b82f6;
   border-radius: 50%;
   margin: 0 auto 1rem;
   animation: spin 1s linear infinite;
@@ -372,18 +374,18 @@ onMounted(() => {
 }
 
 .page-btn {
-  background: rgba(102, 192, 244, 0.1);
-  border: 1px solid rgba(102, 192, 244, 0.2);
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 0.75rem 1.5rem;
-  color: #66c0f4;
+  color: #3b82f6;
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .page-btn:hover:not(:disabled) {
-  background: rgba(102, 192, 244, 0.2);
+  background: rgba(59, 130, 246, 0.15);
 }
 
 .page-btn:disabled {
@@ -392,7 +394,7 @@ onMounted(() => {
 }
 
 .page-info {
-  color: #8b949e;
+  color: #64748b;
   font-size: 0.9rem;
 }
 

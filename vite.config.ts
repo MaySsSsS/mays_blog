@@ -11,5 +11,7 @@ export default defineConfig({
     },
   },
   // GitHub Pages 部署配置
-  base: "/",
+  // 如果部署到 https://<USERNAME>.github.io/，设置 base: "/"
+  // 如果部署到 https://<USERNAME>.github.io/<REPO>/，设置 base: "/<REPO>/"
+  base: process.env.GITHUB_ACTIONS ? "/mays-blog/" : "/",
 });

@@ -5,7 +5,7 @@
       <div class="navbar-container">
         <router-link to="/" class="logo">
           <span class="logo-icon">🎮</span>
-          <span class="logo-text">Gaming Journey</span>
+          <span class="logo-text">Mays Space</span>
         </router-link>
 
         <nav class="nav-links">
@@ -15,7 +15,11 @@
           </router-link>
           <router-link to="/games" class="nav-link">
             <span class="nav-icon">🎯</span>
-            游戏库
+            游戏
+          </router-link>
+          <router-link to="/photos" class="nav-link">
+            <span class="nav-icon">🗺️</span>
+            照片·足迹
           </router-link>
           <router-link to="/about" class="nav-link">
             <span class="nav-icon">👤</span>
@@ -42,7 +46,13 @@
           to="/games"
           class="mobile-nav-link"
           @click="mobileMenuOpen = false"
-          >游戏库</router-link
+          >游戏</router-link
+        >
+        <router-link
+          to="/photos"
+          class="mobile-nav-link"
+          @click="mobileMenuOpen = false"
+          >照片·足迹</router-link
         >
         <router-link
           to="/about"
@@ -62,7 +72,7 @@
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-info">
-          <p>© 2024 Gaming Journey. Powered by Steam API</p>
+          <p>© 2024 Mays Space. Personal blog · Games · Photos</p>
           <p class="footer-sub">Built with Vue 3 + TypeScript + Pinia</p>
         </div>
         <div class="footer-links">
@@ -103,9 +113,10 @@ function toggleMobileMenu() {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(13, 17, 23, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(102, 192, 244, 0.1);
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-container {
@@ -132,7 +143,7 @@ function toggleMobileMenu() {
 }
 
 .logo-text {
-  background: linear-gradient(135deg, #66c0f4, #4fc3f7);
+  background: linear-gradient(135deg, #3b82f6, #10b981);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -149,20 +160,20 @@ function toggleMobileMenu() {
   gap: 0.5rem;
   padding: 0.75rem 1.25rem;
   text-decoration: none;
-  color: #8b949e;
+  color: #64748b;
   font-weight: 500;
   border-radius: 12px;
   transition: all 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #66c0f4;
-  background: rgba(102, 192, 244, 0.1);
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.08);
 }
 
 .nav-link.router-link-active {
-  color: #66c0f4;
-  background: rgba(102, 192, 244, 0.15);
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
 }
 
 .nav-icon {
@@ -184,7 +195,7 @@ function toggleMobileMenu() {
   display: block;
   width: 24px;
   height: 2px;
-  background: #66c0f4;
+  background: #3b82f6;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -192,8 +203,8 @@ function toggleMobileMenu() {
 .mobile-menu {
   display: none;
   padding: 1rem 2rem;
-  background: rgba(13, 17, 23, 0.98);
-  border-top: 1px solid rgba(102, 192, 244, 0.1);
+  background: rgba(255, 255, 255, 0.98);
+  border-top: 1px solid #e2e8f0;
 }
 
 .mobile-menu.active {
@@ -203,7 +214,7 @@ function toggleMobileMenu() {
 .mobile-nav-link {
   display: block;
   padding: 1rem;
-  color: #8b949e;
+  color: #64748b;
   text-decoration: none;
   border-radius: 8px;
   transition: all 0.3s ease;
@@ -211,8 +222,8 @@ function toggleMobileMenu() {
 
 .mobile-nav-link:hover,
 .mobile-nav-link.router-link-active {
-  color: #66c0f4;
-  background: rgba(102, 192, 244, 0.1);
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.08);
 }
 
 /* 主内容 */
@@ -223,8 +234,8 @@ function toggleMobileMenu() {
 
 /* 页脚 */
 .footer {
-  background: rgba(13, 17, 23, 0.95);
-  border-top: 1px solid rgba(102, 192, 244, 0.1);
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
   padding: 2rem;
 }
 
@@ -240,7 +251,7 @@ function toggleMobileMenu() {
 
 .footer-info p {
   margin: 0;
-  color: #8b949e;
+  color: #64748b;
   font-size: 0.9rem;
 }
 
@@ -256,13 +267,13 @@ function toggleMobileMenu() {
 }
 
 .footer-links a {
-  color: #8b949e;
+  color: #64748b;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
-  color: #66c0f4;
+  color: #3b82f6;
 }
 
 /* 响应式 */

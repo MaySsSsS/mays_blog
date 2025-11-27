@@ -15,6 +15,12 @@ const routes: RouteRecordRaw[] = [
     meta: { title: "游戏库" },
   },
   {
+    path: "/photos",
+    name: "Photos",
+    component: () => import("@/views/Photos/index.vue"),
+    meta: { title: "照片与足迹" },
+  },
+  {
     path: "/about",
     name: "About",
     component: () => import("@/views/About/index.vue"),
@@ -31,7 +37,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, _from, next) => {
-  document.title = `${to.meta.title || "Steam Blog"} | My Gaming Journey`;
+  document.title = `${to.meta.title || "主页"} | Mays`;
   next();
 });
 

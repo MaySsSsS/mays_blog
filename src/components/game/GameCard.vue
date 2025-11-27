@@ -72,17 +72,19 @@ function formatLastPlayed(timestamp: number): string {
 <style scoped>
 .game-card {
   position: relative;
-  background: rgba(22, 27, 34, 0.8);
+  background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(102, 192, 244, 0.1);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .game-card:hover {
   transform: translateY(-8px) scale(1.02);
-  border-color: rgba(102, 192, 244, 0.3);
+  border-color: #3b82f6;
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
 }
 
 .game-card:hover .card-glow {
@@ -102,8 +104,8 @@ function formatLastPlayed(timestamp: number): string {
   inset: -1px;
   background: linear-gradient(
     135deg,
-    rgba(102, 192, 244, 0.2),
-    rgba(168, 85, 247, 0.2)
+    rgba(59, 130, 246, 0.15),
+    rgba(16, 185, 129, 0.15)
   );
   border-radius: 16px;
   opacity: 0;
@@ -128,7 +130,7 @@ function formatLastPlayed(timestamp: number): string {
 .card-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,28 +141,29 @@ function formatLastPlayed(timestamp: number): string {
 .play-icon {
   width: 60px;
   height: 60px;
-  background: rgba(102, 192, 244, 0.9);
+  background: rgba(59, 130, 246, 0.95);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: #0d1117;
+  color: #ffffff;
   padding-left: 4px;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
 }
 
 .playtime-badge {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   padding: 0.4rem 0.8rem;
   border-radius: 8px;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #66c0f4;
-  border: 1px solid rgba(102, 192, 244, 0.2);
+  color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card-content {
@@ -170,7 +173,7 @@ function formatLastPlayed(timestamp: number): string {
 .game-name {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #e6edf3;
+  color: #1e293b;
   margin-bottom: 0.75rem;
   line-height: 1.3;
   display: -webkit-box;
@@ -190,7 +193,7 @@ function formatLastPlayed(timestamp: number): string {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.85rem;
-  color: #8b949e;
+  color: #64748b;
 }
 
 .meta-icon {

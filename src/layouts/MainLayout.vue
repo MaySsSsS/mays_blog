@@ -106,24 +106,25 @@ function toggleMobileMenu() {
   flex-direction: column;
 }
 
-/* 导航栏 */
+/* 导航栏 - Glassmorphism 风格 */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
-  height: 70px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -134,16 +135,17 @@ function toggleMobileMenu() {
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
 }
 
 .logo-icon {
-  font-size: 1.75rem;
+  font-size: 1.6rem;
+  filter: drop-shadow(0 2px 4px rgba(99, 102, 241, 0.3));
 }
 
 .logo-text {
-  background: linear-gradient(135deg, #3b82f6, #10b981);
+  background: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #f43f5e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -151,33 +153,38 @@ function toggleMobileMenu() {
 
 .nav-links {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.25rem;
+  background: rgba(241, 245, 249, 0.6);
+  padding: 6px;
+  border-radius: 16px;
 }
 
 .nav-link {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.6rem 1.1rem;
   text-decoration: none;
   color: #64748b;
   font-weight: 500;
+  font-size: 0.9rem;
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
 .nav-link:hover {
-  color: #3b82f6;
-  background: rgba(59, 130, 246, 0.08);
+  color: #6366f1;
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .nav-link.router-link-active {
-  color: #3b82f6;
-  background: rgba(59, 130, 246, 0.1);
+  color: #6366f1;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
 }
 
 .nav-icon {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 /* 移动端菜单按钮 */
@@ -186,25 +193,32 @@ function toggleMobileMenu() {
   flex-direction: column;
   gap: 5px;
   padding: 10px;
-  background: none;
+  background: rgba(241, 245, 249, 0.8);
   border: none;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(99, 102, 241, 0.1);
 }
 
 .mobile-menu-btn span {
   display: block;
-  width: 24px;
+  width: 20px;
   height: 2px;
-  background: #3b82f6;
+  background: #6366f1;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
 
 .mobile-menu {
   display: none;
-  padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.98);
-  border-top: 1px solid #e2e8f0;
+  padding: 1rem 1.5rem 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(226, 232, 240, 0.5);
 }
 
 .mobile-menu.active {
@@ -213,29 +227,32 @@ function toggleMobileMenu() {
 
 .mobile-nav-link {
   display: block;
-  padding: 1rem;
+  padding: 0.9rem 1rem;
   color: #64748b;
   text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .mobile-nav-link:hover,
 .mobile-nav-link.router-link-active {
-  color: #3b82f6;
-  background: rgba(59, 130, 246, 0.08);
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.08);
 }
 
 /* 主内容 */
 .main-content {
   flex: 1;
-  margin-top: 70px;
+  margin-top: 72px;
 }
 
-/* 页脚 */
+/* 页脚 - Glassmorphism 风格 */
 .footer {
-  background: #ffffff;
-  border-top: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
   padding: 2rem;
 }
 
@@ -256,9 +273,9 @@ function toggleMobileMenu() {
 }
 
 .footer-sub {
-  margin-top: 0.5rem !important;
+  margin-top: 0.4rem !important;
   font-size: 0.8rem !important;
-  opacity: 0.7;
+  color: #94a3b8 !important;
 }
 
 .footer-links {
@@ -269,11 +286,15 @@ function toggleMobileMenu() {
 .footer-links a {
   color: #64748b;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
 }
 
 .footer-links a:hover {
-  color: #3b82f6;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.08);
 }
 
 /* 响应式 */
@@ -284,6 +305,10 @@ function toggleMobileMenu() {
 
   .mobile-menu-btn {
     display: flex;
+  }
+
+  .navbar-container {
+    padding: 0 1rem;
   }
 
   .footer-container {

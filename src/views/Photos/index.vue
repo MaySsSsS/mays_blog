@@ -209,7 +209,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted } from "vue";
 import MainLayout from "@/layouts/MainLayout.vue";
-import ChinaMap from "@/components/photos/ChinaMap.vue";
+import ChinaMap from "@/components/photos/ChinaMapEcharts.vue";
 import CitySelector from "@/components/photos/CitySelector.vue";
 import PhotoUploader from "@/components/photos/PhotoUploader.vue";
 import PhotoLightbox from "@/components/photos/PhotoLightbox.vue";
@@ -331,104 +331,116 @@ const formatDate = (dateStr: string): string => {
 <style scoped>
 .photos-page {
   min-height: 100vh;
-  background: #f8fafc;
+  padding-bottom: 4rem;
 }
 
+/* Hero 区域 - 毛玻璃风格 */
 .hero {
-  padding: 3rem 2rem 2rem;
-  background: linear-gradient(
-    180deg,
-    rgba(59, 130, 246, 0.05) 0%,
-    transparent 100%
-  );
+  padding: 2.5rem 1.5rem 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .hero-content {
-  max-width: 960px;
+  max-width: 800px;
   margin: 0 auto;
   text-align: center;
 }
 
 .title {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+  background: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #f43f5e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .subtitle {
-  color: #64748b;
-  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  opacity: 0.9;
 }
 
 .hero-stats {
   display: flex;
   justify-content: center;
-  gap: 3rem;
-  margin-top: 2rem;
+  gap: 2rem;
+  margin-top: 1.5rem;
 }
 
 .stat-item {
   text-align: center;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .stat-value {
   display: block;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  color: #3b82f6;
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .stat-label {
-  font-size: 0.85rem;
-  color: #64748b;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.25rem;
 }
 
+/* 内容区域 */
 .content {
-  padding: 1rem 2rem 4rem;
+  padding: 0 1.5rem;
 }
 
 .layout {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 260px minmax(0, 1.2fr) minmax(0, 1.5fr);
-  gap: 2rem;
+  grid-template-columns: 280px minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 1.5rem;
 }
 
+/* 侧边栏 */
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.25rem;
 }
 
 .sidebar-section {
-  background: #ffffff;
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 20px;
   padding: 1.25rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 }
 
 .section-title {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #1e293b;
+  color: var(--color-text-primary);
 }
 
 .section-count {
-  font-size: 0.8rem;
-  color: #3b82f6;
-  background: rgba(59, 130, 246, 0.1);
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
+  font-size: 0.75rem;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-weight: 500;
 }
 
 .section-header {
@@ -440,42 +452,48 @@ const formatDate = (dateStr: string): string => {
 
 .clear-filter {
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--color-text-secondary);
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
 .clear-filter:hover {
-  color: #3b82f6;
-  background: rgba(59, 130, 246, 0.08);
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.08);
 }
 
+/* 分组列表 */
 .group-list {
   list-style: none;
   margin: 0 0 0.75rem;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
 .group-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.6rem 0.7rem;
-  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
+  border: 1px solid transparent;
 }
 
 .group-item:hover {
-  background: rgba(59, 130, 246, 0.05);
+  background: rgba(99, 102, 241, 0.05);
 }
 
 .group-item.active {
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.2);
 }
 
 .group-main {
@@ -486,29 +504,31 @@ const formatDate = (dateStr: string): string => {
 }
 
 .group-name {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #1e293b;
+  color: var(--color-text-primary);
 }
 
 .group-meta {
-  font-size: 0.8rem;
-  color: #64748b;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.15rem;
 }
 
 .group-delete {
   opacity: 0;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent;
   border: none;
-  border-radius: 6px;
-  color: #64748b;
+  border-radius: 8px;
+  color: var(--color-text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
   flex-shrink: 0;
@@ -519,163 +539,181 @@ const formatDate = (dateStr: string): string => {
 }
 
 .group-delete:hover {
-  background: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
+  background: rgba(244, 63, 94, 0.1);
+  color: #f43f5e;
 }
 
+/* 按钮样式 */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.6rem 1rem;
-  border-radius: 999px;
+  padding: 0.7rem 1.2rem;
+  border-radius: 12px;
   font-size: 0.85rem;
+  font-weight: 500;
   cursor: pointer;
   border: none;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .btn-outline {
   width: 100%;
-  background: transparent;
-  border: 1px dashed rgba(59, 130, 246, 0.4);
-  color: #3b82f6;
+  background: rgba(99, 102, 241, 0.05);
+  border: 1px dashed rgba(99, 102, 241, 0.3);
+  color: #6366f1;
 }
 
 .btn-outline:hover {
-  background: rgba(59, 130, 246, 0.05);
+  background: rgba(99, 102, 241, 0.1);
+  border-style: solid;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   color: #ffffff;
-  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
 }
 
 .btn-sm {
-  padding: 0.4rem 0.8rem;
+  padding: 0.5rem 1rem;
   font-size: 0.8rem;
+  border-radius: 10px;
 }
 
+/* 城市标签 */
 .city-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.25rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid #e2e8f0;
-  background: transparent;
-  color: #64748b;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--color-text-secondary);
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .tag:hover {
-  border-color: #3b82f6;
-  color: #3b82f6;
+  border-color: #6366f1;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.05);
 }
 
 .tag.active {
-  background: rgba(59, 130, 246, 0.1);
-  color: #3b82f6;
-  border-color: #3b82f6;
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+  border-color: rgba(99, 102, 241, 0.3);
 }
 
 .tag-count {
   font-size: 0.7rem;
-  background: rgba(59, 130, 246, 0.15);
-  padding: 0 0.35rem;
-  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.15);
+  padding: 0.1rem 0.4rem;
+  border-radius: 10px;
+  font-weight: 500;
 }
 
+/* 地图区域 */
 .map-section {
-  background: #ffffff;
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 20px;
   padding: 1.25rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  min-height: 500px;
 }
 
 .current-city {
-  font-size: 0.85rem;
-  color: #64748b;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
   font-weight: 400;
 }
 
+/* 照片区域 */
 .photos-section {
-  background: #ffffff;
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 20px;
   padding: 1.25rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 }
 
 .current-group {
-  font-size: 0.9rem;
-  color: #64748b;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
   font-weight: 400;
 }
 
 .uploader-area {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
+/* 空状态 */
 .empty-state {
-  padding: 3rem 2rem;
+  padding: 3rem 1.5rem;
   text-align: center;
 }
 
 .empty-icon {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 1rem;
+  filter: grayscale(0.3);
 }
 
 .empty-state p {
-  color: #64748b;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
 .empty-hint {
   font-size: 0.85rem;
   margin-top: 0.5rem !important;
-  color: #94a3b8 !important;
+  color: var(--color-text-muted) !important;
 }
 
+/* 照片网格 */
 .photos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 1rem;
 }
 
 .photo-item {
-  background: #f8fafc;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
   overflow: hidden;
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(226, 232, 240, 0.6);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .photo-item:hover {
-  transform: translateY(-2px);
-  border-color: #3b82f6;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.12);
 }
 
 .photo-thumb {
   aspect-ratio: 4 / 3;
-  background: #e2e8f0;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
   overflow: hidden;
 }
 
@@ -683,11 +721,11 @@ const formatDate = (dateStr: string): string => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
 }
 
 .photo-item:hover .photo-thumb img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .photo-placeholder {
@@ -696,26 +734,27 @@ const formatDate = (dateStr: string): string => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #94a3b8;
-  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
 }
 
 .photo-meta {
-  padding: 0.6rem 0.7rem 0.7rem;
+  padding: 0.7rem 0.9rem 0.8rem;
 }
 
 .photo-title {
-  font-size: 0.9rem;
-  margin-bottom: 0.1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.15rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #1e293b;
+  color: var(--color-text-primary);
 }
 
 .photo-desc {
-  font-size: 0.8rem;
-  color: #64748b;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
   margin-bottom: 0.25rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -724,21 +763,46 @@ const formatDate = (dateStr: string): string => {
 }
 
 .photo-date {
-  font-size: 0.75rem;
-  color: #94a3b8;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
 }
 
-@media (max-width: 1024px) {
+/* 响应式布局 */
+@media (max-width: 1100px) {
   .layout {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sidebar {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .map-section {
-    order: -1;
+    min-height: 350px;
   }
 
   .hero-stats {
-    gap: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    padding: 0.8rem 1.2rem;
   }
 
   .stat-value {
@@ -746,21 +810,21 @@ const formatDate = (dateStr: string): string => {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 480px) {
   .hero {
-    padding: 2rem 1rem 1.5rem;
+    padding: 1.5rem 1rem;
   }
 
   .title {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
   }
 
   .content {
-    padding-inline: 1rem;
+    padding: 0 1rem;
   }
 
   .layout {
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   .photos-grid {

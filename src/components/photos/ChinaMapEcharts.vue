@@ -46,14 +46,6 @@ use([
   CanvasRenderer,
 ]);
 
-// 中国地图 GeoJSON 数据 - 简化版本
-const chinaGeoJSON = {
-  type: "FeatureCollection",
-  features: [
-    // 这里使用阿里云 DataV 的中国地图数据
-  ],
-};
-
 // 城市坐标数据
 const cityCoordinates: Record<string, [number, number]> = {
   北京: [116.405285, 39.904989],

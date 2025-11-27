@@ -137,18 +137,51 @@ function toggleMobileMenu() {
   text-decoration: none;
   font-size: 1.4rem;
   font-weight: 700;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo::after {
+  display: none;
 }
 
 .logo-icon {
   font-size: 1.6rem;
   filter: drop-shadow(0 2px 4px rgba(99, 102, 241, 0.3));
+  animation: bounce-soft 3s ease-in-out infinite;
+}
+
+@keyframes bounce-soft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
 }
 
 .logo-text {
   background: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #f43f5e 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradient-flow 5s ease infinite;
+}
+
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .nav-links {
@@ -169,22 +202,51 @@ function toggleMobileMenu() {
   font-weight: 500;
   font-size: 0.9rem;
   border-radius: 12px;
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-link::after {
+  display: none;
 }
 
 .nav-link:hover {
   color: #6366f1;
-  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+.nav-link:hover::before {
+  opacity: 1;
 }
 
 .nav-link.router-link-active {
   color: #6366f1;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+  box-shadow: 
+    0 4px 15px rgba(99, 102, 241, 0.15),
+    inset 0 0 0 1px rgba(99, 102, 241, 0.1);
 }
 
 .nav-icon {
   font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover .nav-icon {
+  transform: scale(1.2) rotate(-5deg);
 }
 
 /* 移动端菜单按钮 */
@@ -196,19 +258,20 @@ function toggleMobileMenu() {
   background: rgba(241, 245, 249, 0.8);
   border: none;
   border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  cursor: none;
+  transition: all 0.3s ease;
 }
 
 .mobile-menu-btn:hover {
-  background: rgba(99, 102, 241, 0.1);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+  transform: scale(1.05);
 }
 
 .mobile-menu-btn span {
   display: block;
   width: 20px;
   height: 2px;
-  background: #6366f1;
+  background: linear-gradient(90deg, #6366f1, #ec4899);
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -223,6 +286,18 @@ function toggleMobileMenu() {
 
 .mobile-menu.active {
   display: block;
+  animation: slide-down 0.3s ease;
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .mobile-nav-link {
@@ -232,13 +307,14 @@ function toggleMobileMenu() {
   text-decoration: none;
   border-radius: 12px;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .mobile-nav-link:hover,
 .mobile-nav-link.router-link-active {
   color: #6366f1;
-  background: rgba(99, 102, 241, 0.08);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.08));
+  transform: translateX(5px);
 }
 
 /* 主内容 */
@@ -280,21 +356,30 @@ function toggleMobileMenu() {
 
 .footer-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .footer-links a {
   color: #64748b;
   text-decoration: none;
   font-weight: 500;
-  transition: all 0.2s ease;
-  padding: 0.4rem 0.8rem;
-  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background: rgba(241, 245, 249, 0.5);
+  border: 1px solid transparent;
+}
+
+.footer-links a::after {
+  display: none;
 }
 
 .footer-links a:hover {
-  color: #6366f1;
-  background: rgba(99, 102, 241, 0.08);
+  color: white;
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3);
 }
 
 /* 响应式 */

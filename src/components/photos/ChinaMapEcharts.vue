@@ -1,13 +1,18 @@
 <template>
   <div class="china-map-container">
+    <div v-if="!mapLoaded" class="map-loading">
+      <div class="loading-spinner"></div>
+      <p>加载地图中...</p>
+    </div>
     <v-chart
+      v-else
       ref="chartRef"
       class="chart"
       :option="chartOption"
       :autoresize="true"
       @click="handleMapClick"
     />
-    <div class="map-legend">
+    <div class="map-legend" v-if="mapLoaded">
       <div class="legend-item">
         <span class="legend-dot visited"></span>
         <span>已去过</span>
@@ -21,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 import VChart from "vue-echarts";
 import { use } from "echarts/core";
 import { MapChart, EffectScatterChart, LinesChart } from "echarts/charts";
@@ -115,6 +120,7 @@ const emit = defineEmits<{
 }>();
 
 const chartRef = ref();
+const mapLoaded = ref(false);
 
 // 获取已访问城市的数据
 const visitedCityData = computed(() => {
@@ -302,6 +308,7 @@ const loadChinaMap = async () => {
     );
     const geoJSON = await response.json();
     registerMap("china", geoJSON);
+    mapLoaded.value = true;
   } catch (error) {
     console.error("Failed to load China map:", error);
     // 使用备用方案 - 简化的中国地图轮廓
@@ -309,6 +316,7 @@ const loadChinaMap = async () => {
       type: "FeatureCollection",
       features: [],
     });
+    mapLoaded.value = true;
   }
 };
 
@@ -339,7 +347,9 @@ watch(
 );
 
 // 组件挂载时加载地图
-loadChinaMap();
+onMounted(() => {
+  loadChinaMap();
+});
 </script>
 
 <style scoped>

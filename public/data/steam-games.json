@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-11-27T03:06:05.075Z",
+  "lastUpdated": "2025-11-27T14:57:44.463Z",
   "player": {
     "steamid": "76561198378879040",
     "communityvisibilitystate": 3,
@@ -691,6 +691,7 @@
       "name": "Tom Clancy's Rainbow Six® Siege X",
       "playtime_forever": 477,
       "img_icon_url": "624745d333ac54aedb1ee911013e2edb7722550e",
+      "has_community_visible_stats": true,
       "playtime_windows_forever": 126,
       "playtime_mac_forever": 0,
       "playtime_linux_forever": 0,

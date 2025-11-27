@@ -242,8 +242,8 @@ const activeGroup = computed(() => {
 const cityPhotoCounts = computed(() => {
   const counts: Record<string, number> = {};
   for (const group of photoStore.groups) {
-    if (!counts[group.city]) counts[group.city] = 0;
-    counts[group.city] += group.photos.length;
+    const currentCount = counts[group.city];
+    counts[group.city] = (currentCount ?? 0) + group.photos.length;
   }
   return counts;
 });

@@ -349,7 +349,8 @@ watch(
   (city) => {
     if (city && cityCoordinates[city] && chartRef.value) {
       // 使用 VChart 提供的实例 API 来更新视图（设置 center/zoom）
-      const instance = (chartRef.value as any).getEchartsInstance?.() ||
+      const instance =
+        (chartRef.value as any).getEchartsInstance?.() ||
         (chartRef.value as any).chart;
       if (instance && instance.setOption) {
         instance.setOption(

@@ -649,7 +649,8 @@ const formatDate = (dateStr: string): string => {
 }
 
 /* 强制地图组件适配卡片高度 */
-.map-section > .china-map-container, .map-section .china-map-container {
+.map-section > .china-map-container,
+.map-section .china-map-container {
   height: 100%;
   min-height: 420px;
 }

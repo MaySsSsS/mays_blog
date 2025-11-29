@@ -72,9 +72,9 @@ const updateFollower = () => {
 // 鼠标进入可交互元素
 const handleMouseOver = (e: MouseEvent) => {
   const target = e.target as HTMLElement;
-  if (
+  if (target && target.matches && (
     target.matches('a, button, [role="button"], .clickable, input, select, textarea, .game-card, .photo-item, .nav-link, .glass-card')
-  ) {
+  )) {
     isHovering.value = true;
   }
 };
@@ -86,6 +86,8 @@ const handleMouseOut = () => {
 
 // 点击波纹效果
 const handleClick = (e: MouseEvent) => {
+  if (!e || !e.clientX || !e.clientY) return;
+  
   const id = ++rippleId;
   ripples.value.push({ id, x: e.clientX, y: e.clientY });
   
@@ -99,24 +101,35 @@ onMounted(() => {
   checkMobile();
   
   if (!isMobile.value) {
-    // 初始化位置
-    followerPos.x = cursorPos.x;
-    followerPos.y = cursorPos.y;
+    // 等待DOM完全加载
+    const initCursor = () => {
+      // 初始化位置
+      followerPos.x = cursorPos.x;
+      followerPos.y = cursorPos.y;
+      
+      // 添加事件监听
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseover', handleMouseOver);
+      document.addEventListener('mouseout', handleMouseOut);
+      document.addEventListener('click', handleClick);
+      
+      // 启动跟随动画
+      updateFollower();
+      
+      // 隐藏默认光标
+      document.body.style.cursor = 'none';
+      document.querySelectorAll('a, button, input, select, textarea').forEach(el => {
+        (el as HTMLElement).style.cursor = 'none';
+      });
+    };
     
-    // 添加事件监听
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseout', handleMouseOut);
-    document.addEventListener('click', handleClick);
-    
-    // 启动跟随动画
-    updateFollower();
-    
-    // 隐藏默认光标
-    document.body.style.cursor = 'none';
-    document.querySelectorAll('a, button, input, select, textarea').forEach(el => {
-      (el as HTMLElement).style.cursor = 'none';
-    });
+    // 如果DOM已经加载完成，直接初始化
+    if (document.readyState === 'complete') {
+      initCursor();
+    } else {
+      // 否则等待DOM加载完成
+      window.addEventListener('load', initCursor);
+    }
   }
 });
 

@@ -575,7 +575,7 @@ const loadChinaMap = async (): Promise<boolean> => {
 
     // 使用本地文件，避免外部 API 的 CORS/403 问题
     const baseUrl = import.meta.env.BASE_URL || "/";
-    const response = await fetch(`${baseUrl}data/china.json`);
+    const response = await fetch(`${baseUrl}data/china-geojson.json`);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-11-29T03:05:31.362Z",
+  "lastUpdated": "2025-11-29T16:33:43.716Z",
   "player": {
     "steamid": "76561198378879040",
     "communityvisibilitystate": 3,
@@ -11,14 +11,12 @@
     "avatarmedium": "https://avatars.steamstatic.com/6889e542266ff1eca9c32d7f405a723a0e19f756_medium.jpg",
     "avatarfull": "https://avatars.steamstatic.com/6889e542266ff1eca9c32d7f405a723a0e19f756_full.jpg",
     "avatarhash": "6889e542266ff1eca9c32d7f405a723a0e19f756",
-    "lastlogoff": 1764351683,
-    "personastate": 1,
+    "lastlogoff": 1764432599,
+    "personastate": 3,
     "realname": "GTC",
     "primaryclanid": "103582791429521408",
     "timecreated": 1491720729,
     "personastateflags": 0,
-    "gameextrainfo": "Battlefield™ 6",
-    "gameid": "2807960",
     "loccountrycode": "CN",
     "locstatecode": "32",
     "loccityid": 10460
@@ -2131,16 +2129,16 @@
     {
       "appid": 2807960,
       "name": "Battlefield™ 6",
-      "playtime_forever": 3850,
+      "playtime_2weeks": 36,
+      "playtime_forever": 3887,
       "img_icon_url": "f07be1624106283c0d85e1bc9211d431caa9b4b8",
       "has_community_visible_stats": true,
-      "playtime_windows_forever": 3850,
+      "playtime_windows_forever": 3887,
       "playtime_mac_forever": 0,
       "playtime_linux_forever": 0,
       "playtime_deck_forever": 0,
-      "rtime_last_played": 1764384712,
-      "playtime_disconnected": 0,
-      "playtime_2weeks": 0
+      "rtime_last_played": 1764386911,
+      "playtime_disconnected": 0
     },
     {
       "appid": 3065170,

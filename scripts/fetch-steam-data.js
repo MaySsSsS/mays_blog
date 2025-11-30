@@ -9,9 +9,9 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 配置 - 私人仓库直接配置
-const STEAM_API_KEY = "09EDFE628D0F16EDE4A1FFD4F5DDC2E9";
-const STEAM_ID = "76561198378879040";
+// 配置 - 从环境变量读取，支持 GitHub Actions Secrets
+const STEAM_API_KEY = process.env.STEAM_API_KEY || "";
+const STEAM_ID = process.env.STEAM_ID || "76561198378879040";
 
 const API_BASE = "https://api.steampowered.com";
 

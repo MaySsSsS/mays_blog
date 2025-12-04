@@ -111,7 +111,7 @@ jobs:
     if: always()
 
     permissions:
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout repository

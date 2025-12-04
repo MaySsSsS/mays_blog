@@ -4,8 +4,7 @@ import type { GameData, SteamPlayerSummary, GameStats } from "../types";
 
 // Game API Worker URL
 const GAME_API_URL =
-  import.meta.env.VITE_GAME_API_URL ||
-  "https://mays-game-api.mays.workers.dev";
+  import.meta.env.VITE_GAME_API_URL || "https://mays-game-api.mays.workers.dev";
 
 export const useSteamStore = defineStore("steam", () => {
   // 状态
@@ -73,7 +72,7 @@ export const useSteamStore = defineStore("steam", () => {
         }
         data = await response.json();
       }
-      
+
       games.value = data.games || [];
       playerInfo.value = data.player || null;
       lastUpdated.value = data.lastUpdated || null;

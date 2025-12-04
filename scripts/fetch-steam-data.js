@@ -46,10 +46,17 @@ async function uploadToR2(data, key) {
   // 创建待签名字符串
   const algorithm = "AWS4-HMAC-SHA256";
   const credentialScope = `${dateStamp}/${region}/${service}/aws4_request`;
-  const stringToSign = `${algorithm}\n${amzDate}\n${credentialScope}\n${await sha256Hex(canonicalRequest)}`;
+  const stringToSign = `${algorithm}\n${amzDate}\n${credentialScope}\n${await sha256Hex(
+    canonicalRequest
+  )}`;
 
   // 计算签名
-  const signingKey = await getSignatureKey(R2_SECRET_ACCESS_KEY, dateStamp, region, service);
+  const signingKey = await getSignatureKey(
+    R2_SECRET_ACCESS_KEY,
+    dateStamp,
+    region,
+    service
+  );
   const signature = await hmacHex(signingKey, stringToSign);
 
   // 创建授权头
@@ -94,7 +101,11 @@ async function hmac(key, message) {
     false,
     ["sign"]
   );
-  return await crypto.subtle.sign("HMAC", cryptoKey, new TextEncoder().encode(message));
+  return await crypto.subtle.sign(
+    "HMAC",
+    cryptoKey,
+    new TextEncoder().encode(message)
+  );
 }
 
 async function hmacHex(key, message) {

@@ -43,9 +43,12 @@ export default {
 
     try {
       // === 获取 Steam 游戏数据 ===
-      if ((path === "/api/steam-games" || path === "/api/steam-games.json") && method === "GET") {
+      if (
+        (path === "/api/steam-games" || path === "/api/steam-games.json") &&
+        method === "GET"
+      ) {
         const object = await env.GAME_BUCKET.get("steam-games.json");
-        
+
         if (!object) {
           return new Response(JSON.stringify({ error: "Data not found" }), {
             status: 404,
@@ -57,7 +60,7 @@ export default {
         }
 
         const data = await object.text();
-        
+
         return new Response(data, {
           status: 200,
           headers: {
@@ -89,7 +92,9 @@ export default {
     } catch (error) {
       console.error("Worker error:", error);
       return new Response(
-        JSON.stringify({ error: error instanceof Error ? error.message : "Internal Error" }),
+        JSON.stringify({
+          error: error instanceof Error ? error.message : "Internal Error",
+        }),
         {
           status: 500,
           headers: {

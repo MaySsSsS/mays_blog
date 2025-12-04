@@ -1,15 +1,29 @@
-# 🎮 Mays Blog
+# 🌐 Mays Site
 
-我的个人 Steam 游戏博客，展示我的游戏收藏和游玩时长。
+个人站点集合，包含游戏展示和照片足迹两个子站点。
+
+## 🎮 子站点
+
+| 站点      | 域名                | 说明                           |
+| --------- | ------------------- | ------------------------------ |
+| **Game**  | `game.maysssss.cn`  | Steam 游戏库展示，赛博朋克风格 |
+| **Photo** | `photo.maysssss.cn` | 照片与足迹，旅游风格           |
 
 ## ✨ 功能特点
 
-- 📊 展示 Steam 游戏库和游玩统计
+### Game 站点
+
+- 📊 Steam 游戏库和游玩统计
 - 🎯 游戏时长排行
 - 🕐 最近游玩的游戏
-- 🔍 游戏搜索和筛选
-- 📱 响应式设计，支持移动端
-- 🌙 暗色主题，游戏风格 UI
+- 🎨 赛博朋克 UI 风格
+
+### Photo 站点
+
+- 🗺️ 中国地图足迹可视化
+- 📸 照片分组管理
+- ☁️ Cloudflare R2 云存储
+- 🎨 温暖旅游风格
 
 ## 🛠️ 技术栈
 
@@ -18,31 +32,29 @@
 - **Pinia** - 状态管理
 - **Vue Router** - 路由管理
 - **Vite** - 构建工具
+- **Cloudflare Workers** - 照片 API
 - **GitHub Pages** - 静态托管
-- **GitHub Actions** - 自动化部署
 
 ## 🚀 本地开发
 
-```bash
+\`\`\`bash
+
 # 安装依赖
+
 npm install
 
-# 启动开发服务器
-npm run dev
+# 启动 Game 站点
 
-# 构建生产版本
-npm run build
-```
+npm run dev:game
 
-## 📦 部署
+# 启动 Photo 站点
 
-推送代码到 `main` 分支后，GitHub Actions 会自动：
+npm run dev:photo
 
-1. 获取最新的 Steam 游戏数据
-2. 构建项目
-3. 部署到 GitHub Pages
+# 构建所有站点
 
-数据每天北京时间 10:00 自动更新。
+npm run build:all
+\`\`\`
 
 ## 📄 许可证
 

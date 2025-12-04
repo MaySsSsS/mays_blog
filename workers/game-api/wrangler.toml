@@ -1,0 +1,11 @@
+name = "mays-game-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# R2 存储桶绑定
+[[r2_buckets]]
+binding = "GAME_BUCKET"
+bucket_name = "my-games"
+
+[vars]
+CORS_ORIGIN = "https://game.maysssss.cn"

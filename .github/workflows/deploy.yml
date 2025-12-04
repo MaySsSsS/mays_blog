@@ -33,10 +33,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Fetch Steam data
+      - name: Fetch Steam data and upload to R2
         env:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
           STEAM_ID: ${{ secrets.STEAM_ID }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: node scripts/fetch-steam-data.js
 
       - name: Commit updated data

@@ -1,6 +1,6 @@
 /**
  * Steam 数据获取脚本
- * 用于 GitHub Actions 定时获取 Steam 游戏数据
+ * 用于 GitHub Actions 定时获取 Steam 游戏数据并上传到 Cloudflare R2
  */
 import fs from "fs";
 import path from "path";
@@ -9,11 +9,109 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 配置 - 从环境变量读取，支持 GitHub Actions Secrets
+// Steam 配置 - 从环境变量读取
 const STEAM_API_KEY = process.env.STEAM_API_KEY || "";
 const STEAM_ID = process.env.STEAM_ID || "76561198378879040";
 
+// Cloudflare R2 配置
+const R2_ACCOUNT_ID = process.env.R2_ACCOUNT_ID || "";
+const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID || "";
+const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY || "";
+const R2_BUCKET_NAME = "my-games";
+
 const API_BASE = "https://api.steampowered.com";
+
+// 简单的 AWS S3 签名 v4 实现（用于 R2）
+async function uploadToR2(data, key) {
+  const endpoint = `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`;
+  const region = "auto";
+  const service = "s3";
+  const method = "PUT";
+  const host = `${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`;
+  const contentType = "application/json";
+  const body = JSON.stringify(data, null, 2);
+
+  const now = new Date();
+  const amzDate = now.toISOString().replace(/[:-]|\.\d{3}/g, "");
+  const dateStamp = amzDate.slice(0, 8);
+
+  // 创建规范请求
+  const canonicalUri = `/${R2_BUCKET_NAME}/${key}`;
+  const canonicalQueryString = "";
+  const payloadHash = await sha256Hex(body);
+  const canonicalHeaders = `content-type:${contentType}\nhost:${host}\nx-amz-content-sha256:${payloadHash}\nx-amz-date:${amzDate}\n`;
+  const signedHeaders = "content-type;host;x-amz-content-sha256;x-amz-date";
+  const canonicalRequest = `${method}\n${canonicalUri}\n${canonicalQueryString}\n${canonicalHeaders}\n${signedHeaders}\n${payloadHash}`;
+
+  // 创建待签名字符串
+  const algorithm = "AWS4-HMAC-SHA256";
+  const credentialScope = `${dateStamp}/${region}/${service}/aws4_request`;
+  const stringToSign = `${algorithm}\n${amzDate}\n${credentialScope}\n${await sha256Hex(canonicalRequest)}`;
+
+  // 计算签名
+  const signingKey = await getSignatureKey(R2_SECRET_ACCESS_KEY, dateStamp, region, service);
+  const signature = await hmacHex(signingKey, stringToSign);
+
+  // 创建授权头
+  const authorizationHeader = `${algorithm} Credential=${R2_ACCESS_KEY_ID}/${credentialScope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
+
+  // 发送请求
+  const response = await fetch(`${endpoint}${canonicalUri}`, {
+    method,
+    headers: {
+      "Content-Type": contentType,
+      "x-amz-date": amzDate,
+      "x-amz-content-sha256": payloadHash,
+      Authorization: authorizationHeader,
+    },
+    body,
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`R2 upload failed: ${response.status} - ${text}`);
+  }
+
+  return true;
+}
+
+// SHA256 哈希
+async function sha256Hex(message) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(message);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+// HMAC-SHA256
+async function hmac(key, message) {
+  const cryptoKey = await crypto.subtle.importKey(
+    "raw",
+    typeof key === "string" ? new TextEncoder().encode(key) : key,
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  return await crypto.subtle.sign("HMAC", cryptoKey, new TextEncoder().encode(message));
+}
+
+async function hmacHex(key, message) {
+  const sig = await hmac(key, message);
+  return Array.from(new Uint8Array(sig))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+// 获取签名密钥
+async function getSignatureKey(secretKey, dateStamp, region, service) {
+  const kDate = await hmac("AWS4" + secretKey, dateStamp);
+  const kRegion = await hmac(kDate, region);
+  const kService = await hmac(kRegion, service);
+  const kSigning = await hmac(kService, "aws4_request");
+  return kSigning;
+}
 
 async function fetchPlayerSummary() {
   const url = `${API_BASE}/ISteamUser/GetPlayerSummaries/v2/?key=${STEAM_API_KEY}&steamids=${STEAM_ID}`;
@@ -74,7 +172,14 @@ async function main() {
       games: mergedGames,
     };
 
-    // 写入文件
+    // 上传到 Cloudflare R2
+    if (R2_ACCESS_KEY_ID && R2_SECRET_ACCESS_KEY) {
+      console.log("☁️ 上传到 Cloudflare R2...");
+      await uploadToR2(outputData, "steam-games.json");
+      console.log("✅ R2 上传成功!");
+    }
+
+    // 同时保存本地文件（用于开发和备份）
     const outputPath = path.join(__dirname, "../public/data/steam-games.json");
     fs.writeFileSync(outputPath, JSON.stringify(outputData, null, 2));
 

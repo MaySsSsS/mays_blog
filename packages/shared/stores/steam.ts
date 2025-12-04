@@ -2,6 +2,11 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import type { GameData, SteamPlayerSummary, GameStats } from "../types";
 
+// Game API Worker URL
+const GAME_API_URL =
+  import.meta.env.VITE_GAME_API_URL ||
+  "https://mays-game-api.mays.workers.dev";
+
 export const useSteamStore = defineStore("steam", () => {
   // 状态
   const games = ref<GameData[]>([]);
@@ -49,13 +54,26 @@ export const useSteamStore = defineStore("steam", () => {
     error.value = null;
 
     try {
-      // 从静态 JSON 文件加载数据（由 GitHub Actions 生成）
-      const baseUrl = import.meta.env.BASE_URL || "/";
-      const response = await fetch(`${baseUrl}data/steam-games.json`);
-      if (!response.ok) {
-        throw new Error("无法加载游戏数据");
+      // 优先从 Worker API 加载，失败则回退到本地文件
+      let data;
+      try {
+        const response = await fetch(`${GAME_API_URL}/api/steam-games`);
+        if (response.ok) {
+          data = await response.json();
+        } else {
+          throw new Error("API request failed");
+        }
+      } catch {
+        // 回退到本地静态文件
+        console.log("Falling back to local data...");
+        const baseUrl = import.meta.env.BASE_URL || "/";
+        const response = await fetch(`${baseUrl}data/steam-games.json`);
+        if (!response.ok) {
+          throw new Error("无法加载游戏数据");
+        }
+        data = await response.json();
       }
-      const data = await response.json();
+      
       games.value = data.games || [];
       playerInfo.value = data.player || null;
       lastUpdated.value = data.lastUpdated || null;

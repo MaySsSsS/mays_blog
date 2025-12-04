@@ -104,42 +104,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  # 构建并部署Photo站到photo.maysssss.cn
-  deploy-photo:
-    runs-on: ubuntu-latest
-    needs: update-steam-data
-    if: always()
-
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build Photo App
-        run: pnpm build:photo
-
-      - name: Deploy to Photo subdomain
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./apps/photo/dist
-          publish_branch: gh-pages-photo
-          cname: photo.maysssss.cn
+  # Photo 站点已改用 Cloudflare Pages 自动部署
+  # 访问 https://dash.cloudflare.com 管理 mays-photo 项目

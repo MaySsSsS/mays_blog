@@ -4,9 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "dev:game": "pnpm --filter @mays/game dev",
+    "dev:photo": "pnpm --filter @mays/photo dev",
+    "build": "pnpm -r --filter '@mays/*' build",
+    "build:game": "pnpm --filter @mays/game build",
+    "build:photo": "pnpm --filter @mays/photo build",
+    "preview:game": "pnpm --filter @mays/game preview",
+    "preview:photo": "pnpm --filter @mays/photo preview"
   },
   "dependencies": {
     "axios": "^1.13.2",
